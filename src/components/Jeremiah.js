@@ -32,7 +32,7 @@ const Jeremiah = ({ onViewChange }) => {
       0.1,
       1000
     );
-    camera.position.set(0, 4, 15);
+    camera.position.set(0, 4, 20);
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -82,8 +82,8 @@ const Jeremiah = ({ onViewChange }) => {
     controls.dampingFactor = 0.05;
     controls.enableZoom = true;
     controls.enablePan = true;
-    controls.minDistance = 5;
-    controls.maxDistance = 30;
+    controls.minDistance = 8;
+    controls.maxDistance = 35;
     controlsRef.current = controls;
 
     // Load the hack scene (Jeremiah model) - load exactly as is
@@ -243,9 +243,9 @@ const Jeremiah = ({ onViewChange }) => {
         const createTextSprite = () => {
           const canvas = document.createElement('canvas');
           const context = canvas.getContext('2d');
-          // Better aspect ratio to prevent stretching
-          canvas.width = 1400;
-          canvas.height = 320;
+          // Even larger canvas for bigger text
+          canvas.width = 2200;
+          canvas.height = 480;
           
           // Background
           context.fillStyle = 'rgba(0, 0, 0, 0.85)';
@@ -253,36 +253,36 @@ const Jeremiah = ({ onViewChange }) => {
           
           // Border with gradient effect
           context.strokeStyle = '#00ff00';
-          context.lineWidth = 3;
+          context.lineWidth = 5;
           context.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
           
           // Top border accent (cyan)
           context.strokeStyle = '#00ffff';
-          context.lineWidth = 2;
+          context.lineWidth = 3;
           context.beginPath();
           context.moveTo(10, 10);
           context.lineTo(canvas.width - 10, 10);
           context.stroke();
           
-          // Title text
+          // Title text - even larger font
           context.fillStyle = '#00ff00';
-          context.font = 'bold 56px "Courier New", monospace';
+          context.font = 'bold 88px "Courier New", monospace';
           context.textAlign = 'center';
           context.textBaseline = 'middle';
           context.shadowColor = '#00ff00';
-          context.shadowBlur = 15;
+          context.shadowBlur = 25;
           
           const titleText = '> JONAH ORTEGA\'S PORTFOLIO <';
-          context.fillText(titleText, canvas.width / 2, 100);
+          context.fillText(titleText, canvas.width / 2, 160);
           
-          // Subtitle text (smaller)
+          // Subtitle text - even larger font
           context.fillStyle = '#00ffff';
-          context.font = 'bold 36px "Courier New", monospace';
+          context.font = 'bold 58px "Courier New", monospace';
           context.shadowColor = '#00ffff';
-          context.shadowBlur = 10;
+          context.shadowBlur = 18;
           
           const subtitleText = 'click on the computer';
-          context.fillText(subtitleText, canvas.width / 2, 220);
+          context.fillText(subtitleText, canvas.width / 2, 340);
           
           const texture = new THREE.CanvasTexture(canvas);
           texture.needsUpdate = true;
@@ -294,8 +294,8 @@ const Jeremiah = ({ onViewChange }) => {
           });
           
           const sprite = new THREE.Sprite(spriteMaterial);
-          // Better aspect ratio to match canvas (1400/320 = 4.375)
-          sprite.scale.set(6, 1.37, 1);
+          // Even larger scale to match bigger canvas
+          sprite.scale.set(9, 2, 1);
           
           return sprite;
         };
@@ -306,7 +306,8 @@ const Jeremiah = ({ onViewChange }) => {
         
         // Create single combined text sprite
         const textSprite = createTextSprite();
-        textSprite.position.set(model.position.x, modelTop + textHeight, model.position.z);
+        // Move text more to the right (positive x) to center it better
+        textSprite.position.set(model.position.x + 2, modelTop + textHeight, model.position.z);
         scene.add(textSprite);
         
         setIsLoading(false);

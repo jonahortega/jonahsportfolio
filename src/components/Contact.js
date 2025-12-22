@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 import './Contact.css';
 
 const Contact = () => {
@@ -61,15 +61,15 @@ const Contact = () => {
     },
     {
       icon: FaPhone,
-      label: 'Phone',
-      value: '732-796-5366',
+      label: 'Phone (US)',
+      value: '+1 7327965366',
       link: 'tel:+17327965366'
     },
     {
-      icon: FaMapMarkerAlt,
-      label: 'Location',
-      value: 'Manalapan, NJ | Paris, FR',
-      link: null
+      icon: FaPhone,
+      label: 'Phone (FR)',
+      value: '+33 6 88 98 00 08',
+      link: 'tel:+33688980008'
     }
   ];
 
