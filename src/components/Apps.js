@@ -48,14 +48,6 @@ const Apps = ({ onViewChange }) => {
       description: 'My organizations',
       view: 'organizations'
     },
-    {
-      id: 'contact',
-      name: 'Contact',
-      icon: FaEnvelope,
-      color: '#00ff88',
-      description: 'Get in touch',
-      view: 'contact'
-    },
   ];
 
   const handleAppClick = (app) => {

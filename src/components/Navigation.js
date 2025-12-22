@@ -18,7 +18,6 @@ const Navigation = ({ onViewChange, currentView }) => {
 
   const navItems = [
     { id: 'apps', label: 'Apps', action: () => onViewChange && onViewChange('apps') },
-    { id: 'contact', label: 'Contact', action: () => onViewChange && onViewChange('contact') },
   ];
 
   const handleNavClick = (item) => {
