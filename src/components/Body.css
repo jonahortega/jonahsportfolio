@@ -1,0 +1,376 @@
+.body-section {
+  position: relative;
+  padding: 100px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.skeleton-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(0, 255, 0, 0.3);
+  box-shadow: 
+    0 0 50px rgba(0, 255, 0, 0.4),
+    inset 0 0 50px rgba(0, 255, 0, 0.1);
+}
+
+.skeleton-reference {
+  display: none;
+}
+
+.skeleton-svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(0, 255, 0, 0.6));
+}
+
+.skeleton-bone {
+  fill: none;
+  stroke: #00ff00;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.9));
+  transition: all 0.3s ease;
+}
+
+.skeleton-bone:hover {
+  stroke: #00ff88;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 12px rgba(0, 255, 136, 1));
+}
+
+.skeleton-bone.skull-cranium {
+  fill: rgba(0, 255, 0, 0.08);
+  stroke: #00ff00;
+  stroke-width: 3;
+}
+
+.skeleton-bone.maxilla,
+.skeleton-bone.mandible {
+  stroke-width: 2.5;
+}
+
+.skeleton-bone.vertebra {
+  fill: rgba(0, 255, 0, 0.15);
+  stroke: #00ff00;
+}
+
+.skeleton-bone.rib {
+  stroke: #00ff88;
+  stroke-width: 1.8;
+  opacity: 0.85;
+}
+
+.skeleton-bone.clavicle,
+.skeleton-bone.scapula {
+  stroke-width: 2.5;
+}
+
+.skeleton-bone.humerus,
+.skeleton-bone.femur {
+  stroke-width: 5;
+}
+
+.skeleton-bone.radius,
+.skeleton-bone.ulna,
+.skeleton-bone.tibia {
+  stroke-width: 4;
+}
+
+.skeleton-bone.fibula {
+  stroke-width: 3;
+}
+
+.skeleton-bone.metacarpal,
+.skeleton-bone.phalanx {
+  stroke-width: 2;
+}
+
+.skeleton-bone.toe {
+  stroke-width: 2;
+}
+
+.skeleton-bone.patella {
+  fill: rgba(0, 255, 0, 0.2);
+  stroke: #00ff00;
+}
+
+.skeleton-bone.carpal {
+  fill: rgba(0, 255, 136, 0.2);
+  stroke: #00ff88;
+}
+
+.skeleton-bone.foot {
+  fill: rgba(0, 255, 0, 0.1);
+  stroke: #00ff00;
+}
+
+.skeleton-bone.skull {
+  fill: rgba(0, 255, 0, 0.1);
+  stroke: #00ff00;
+  stroke-width: 3;
+}
+
+.skeleton-bone.jaw {
+  stroke-width: 2.5;
+}
+
+.skeleton-bone.pelvis {
+  stroke-width: 3;
+}
+
+.skeleton-bone.vertebra {
+  fill: rgba(0, 255, 0, 0.2);
+  stroke: #00ff00;
+  stroke-width: 2;
+}
+
+.skeleton-bone.rib {
+  stroke: #00ff88;
+  stroke-width: 1.5;
+  opacity: 0.8;
+}
+
+.skeleton-hole {
+  fill: rgba(0, 0, 0, 0.8);
+  stroke: #00ff00;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 5px rgba(0, 255, 0, 0.5));
+}
+
+.skeleton-detail {
+  stroke: #00ff88;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+.skeleton-joint {
+  fill: #00ff00;
+  stroke: #00ff88;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.8));
+  animation: pulse-joint 2s infinite ease-in-out;
+}
+
+.cyberpunk-joint {
+  fill: #00ff00;
+  stroke: #00ff88;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 15px rgba(0, 255, 0, 1));
+  animation: pulse-joint 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-joint {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(0, 255, 0, 1));
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 25px rgba(0, 255, 136, 1));
+  }
+}
+
+.head-group {
+  cursor: pointer;
+}
+
+.head-group:hover .skeleton-bone.skull {
+  fill: rgba(0, 255, 0, 0.2);
+  stroke: #00ff88;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 136, 1));
+}
+
+.arm-group {
+  cursor: pointer;
+}
+
+.arm-group:hover .skeleton-bone {
+  stroke: #00ff88;
+  filter: drop-shadow(0 0 12px rgba(0, 255, 136, 1));
+}
+
+.hand-group {
+  cursor: pointer;
+}
+
+.hand-group:hover .skeleton-bone {
+  stroke: #00ff88;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 15px rgba(0, 255, 136, 1));
+}
+
+.cyber-wire {
+  stroke: #00ff88;
+  stroke-width: 1;
+  stroke-dasharray: 5, 5;
+  opacity: 0.4;
+  animation: dash 2s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(0, 255, 136, 0.6));
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.spine-group .vertebra:hover {
+  fill: rgba(0, 255, 0, 0.4);
+  stroke: #00ff88;
+}
+
+.ribs-group .rib:hover {
+  stroke: #00ff00;
+  stroke-width: 2;
+  opacity: 1;
+}
+
+.menu-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  border: 2px solid #00ff00;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 0, 0.8),
+    inset 0 0 30px rgba(0, 255, 0, 0.1);
+  padding: 30px;
+  min-width: 300px;
+  z-index: 100;
+  font-family: 'Courier New', monospace;
+}
+
+.head-menu {
+  top: 20%;
+}
+
+.hands-menu {
+  top: 60%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.close-button:hover {
+  background: rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  transform: rotate(90deg);
+}
+
+.menu-title {
+  color: #00ff00;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  font-weight: 700;
+}
+
+.menu-title::before {
+  content: '> ';
+  color: #00ff88;
+}
+
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu-option {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  color: #00ff88;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.menu-option:hover {
+  background: rgba(0, 255, 0, 0.15);
+  border-color: #00ff00;
+  color: #00ff00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+.menu-option::before {
+  content: '> ';
+  color: #00ff00;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.menu-option:hover::before {
+  opacity: 1;
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+  color: #00ff00;
+  filter: drop-shadow(0 0 5px rgba(0, 255, 0, 0.8));
+}
+
+.menu-text {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .skeleton-container {
+    max-width: 300px;
+    padding: 20px;
+  }
+
+  .menu-overlay {
+    min-width: 250px;
+    padding: 20px;
+  }
+
+  .menu-title {
+    font-size: 1.2rem;
+  }
+
+  .menu-option {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+}
+

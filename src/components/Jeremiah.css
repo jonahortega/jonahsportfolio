@@ -1,0 +1,339 @@
+.jeremiah-section {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.jeremiah-section .container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.jeremiah-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 0, 0.03) 2px,
+      rgba(0, 255, 0, 0.03) 4px
+    );
+  pointer-events: none;
+  z-index: 1;
+  animation: scan-lines 8s linear infinite;
+}
+
+@keyframes scan-lines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(20px); }
+}
+
+.jeremiah-section .section-title {
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 0, 0.8),
+    0 0 20px rgba(0, 255, 0, 0.4),
+    0 0 30px rgba(0, 255, 0, 0.2);
+  letter-spacing: 3px;
+  position: relative;
+  z-index: 2;
+}
+
+.jeremiah-section .section-title::before {
+  content: '> ';
+  color: #00ff00;
+  animation: blink 1s infinite;
+}
+
+.jeremiah-section .section-title::after {
+  content: ' <';
+  color: #00ff00;
+  animation: blink 1s infinite 0.5s;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.jeremiah-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+.jeremiah-3d-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.jeremiah-3d-canvas::before {
+  display: none;
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+.jeremiah-3d-canvas:active {
+  cursor: grabbing;
+}
+
+.jeremiah-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 0, 0.8),
+    0 0 20px rgba(0, 255, 0, 0.4);
+  z-index: 10;
+  letter-spacing: 2px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.jeremiah-instructions {
+  margin-top: 20px;
+  text-align: center;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  text-shadow: 
+    0 0 5px rgba(0, 255, 0, 0.5),
+    0 0 10px rgba(0, 255, 0, 0.3);
+  opacity: 0.8;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+.jeremiah-instructions::before {
+  content: '[ ';
+  color: #00ff00;
+}
+
+.jeremiah-instructions::after {
+  content: ' ]';
+  color: #00ff00;
+}
+
+.jeremiah-instructions p {
+  margin: 0;
+}
+
+.jeremiah-floating-box {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 10, 0.95) 100%);
+  border: 2px solid #00ff00;
+  border-top: 3px solid #00ffff;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 0, 0.6),
+    0 0 60px rgba(0, 255, 0, 0.3),
+    0 0 90px rgba(0, 255, 0, 0.1),
+    inset 0 0 30px rgba(0, 255, 0, 0.1),
+    0 4px 20px rgba(0, 0, 0, 0.8);
+  padding: 25px 40px;
+  z-index: 10;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.jeremiah-floating-box::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00ff00, #00ffff, #00ff00);
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(8px);
+}
+
+.jeremiah-floating-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ffff, transparent);
+  animation: scan-line 2s linear infinite;
+}
+
+@keyframes scan-line {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.jeremiah-box-title {
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0 0 12px 0;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 0, 1),
+    0 0 20px rgba(0, 255, 0, 0.6),
+    0 0 30px rgba(0, 255, 0, 0.3),
+    0 0 40px rgba(0, 255, 0, 0.1);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.jeremiah-box-title::before {
+  content: '> ';
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.jeremiah-box-title::after {
+  content: ' <';
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.jeremiah-box-subtitle {
+  color: #00ffff;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  margin: 0;
+  text-shadow: 
+    0 0 8px rgba(0, 255, 255, 0.8),
+    0 0 16px rgba(0, 255, 255, 0.4),
+    0 0 24px rgba(0, 255, 255, 0.2);
+  letter-spacing: 2px;
+  opacity: 1;
+  font-weight: 500;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .jeremiah-section {
+    padding: 0;
+  }
+  
+  .jeremiah-container {
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .jeremiah-3d-canvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .jeremiah-floating-box {
+    padding: 20px 30px;
+    top: 3%;
+  }
+  
+  .jeremiah-box-title {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+  }
+  
+  .jeremiah-box-subtitle {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+  
+  .jeremiah-loading {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .jeremiah-section {
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .jeremiah-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .jeremiah-3d-canvas {
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .jeremiah-floating-box {
+    padding: 15px 20px;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 90%;
+  }
+  
+  .jeremiah-box-title {
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  
+  .jeremiah-box-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+  
+  .jeremiah-loading {
+    font-size: 0.9rem;
+    padding: 0 15px;
+    text-align: center;
+  }
+  
+  .jeremiah-instructions {
+    font-size: 0.75rem;
+    padding: 0 15px;
+  }
+}
+

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Starry galaxy sky HDRi background photosphere
+* source:	https://sketchfab.com/3d-models/starry-galaxy-sky-hdri-background-photosphere-e85426f6c246446a87c01e3f8357d98d
+* author:	Aliaksandr.melas (https://sketchfab.com/alexandr.melas)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Starry galaxy sky HDRi background photosphere" (https://sketchfab.com/3d-models/starry-galaxy-sky-hdri-background-photosphere-e85426f6c246446a87c01e3f8357d98d) by Aliaksandr.melas (https://sketchfab.com/alexandr.melas) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
