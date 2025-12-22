@@ -108,3 +108,4 @@ Here are free downloadable 3D models you can explore and potentially implement:
 - Always check the license (most free models are CC Attribution)
 - GLB format is usually better than GLTF (single file vs multiple files)
 
+

@@ -24,3 +24,4 @@ echo "   - Save as 'hand.glb' in this directory"
 echo ""
 echo "After downloading, the app will automatically load and style it!"
 
+
