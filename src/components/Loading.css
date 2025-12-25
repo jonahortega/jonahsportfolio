@@ -67,133 +67,51 @@
 }
 
 .terminal-body {
-  padding: 20px;
+  padding: 30px;
   height: calc(100% - 50px);
   overflow-y: auto;
   position: relative;
   color: #00ff00;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.code-lines {
-  margin-bottom: 30px;
-  min-height: 200px;
-}
-
-.code-line {
+  font-size: 1rem;
+  line-height: 1.8;
   display: flex;
-  margin-bottom: 5px;
-  font-family: 'Courier New', monospace;
+  align-items: flex-start;
 }
 
-.line-number {
-  color: #666;
-  margin-right: 15px;
-  min-width: 40px;
-  font-size: 0.85rem;
-}
-
-.line-content {
-  color: #00ff00;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-}
-
-.cursor {
-  color: #00ff00;
-  margin-left: 5px;
-  font-weight: bold;
-}
-
-.progress-section {
-  margin-top: 30px;
-  padding: 20px;
-  background: rgba(0, 255, 0, 0.05);
-  border: 1px solid rgba(0, 255, 0, 0.3);
-}
-
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  font-size: 0.85rem;
-}
-
-.progress-text {
-  color: #00ff00;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
-}
-
-.progress-japanese {
-  color: #00ff88;
-  text-shadow: 0 0 5px rgba(0, 255, 136, 0.8);
-}
-
-.progress-bar-wrapper {
+.typing-text-container {
+  width: 100%;
+  max-width: 100%;
   position: relative;
-  height: 30px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid #00ff00;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #00ff00, #00ff88, #00ff00);
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
-  position: relative;
-  overflow: hidden;
-}
-
-.progress-glow {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50px;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5));
-  animation: shimmer 1s infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-50px);
-  }
-  100% {
-    transform: translateX(100px);
-  }
-}
-
-.progress-percentage {
-  position: absolute;
-  right: 10px;
-  color: #00ff00;
-  font-weight: bold;
-  text-shadow: 0 0 10px rgba(0, 255, 0, 1);
   z-index: 2;
 }
 
-.status-line {
-  margin-top: 20px;
-  padding: 10px;
-  background: rgba(0, 255, 0, 0.05);
-  border-left: 3px solid #00ff00;
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-}
-
-.status-text {
+.typing-text {
   color: #00ff00;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+  text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+  font-family: 'Courier New', 'Monaco', monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
 }
 
-.status-japanese {
-  color: #00ff88;
-  text-shadow: 0 0 5px rgba(0, 255, 136, 0.8);
+.typing-cursor {
+  color: #00ff00;
+  margin-left: 3px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 1);
+  animation: blink 1s infinite;
 }
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
 
 .scan-lines {
   position: absolute;
@@ -268,6 +186,40 @@
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
+.continue-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  font-family: 'Courier New', 'Monaco', monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  box-shadow: 
+    0 0 15px rgba(0, 255, 0, 0.5),
+    inset 0 0 10px rgba(0, 255, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.continue-button:hover {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 
+    0 0 25px rgba(0, 255, 0, 0.8),
+    inset 0 0 15px rgba(0, 255, 0, 0.2);
+  text-shadow: 0 0 15px rgba(0, 255, 0, 1);
+}
+
+.continue-button:active {
+  transform: scale(0.95);
+}
+
 @media (max-width: 768px) {
   .terminal-container {
     width: 95%;
@@ -275,13 +227,20 @@
   }
 
   .terminal-body {
-    font-size: 0.8rem;
-    padding: 15px;
+    font-size: 0.85rem;
+    padding: 20px;
   }
 
-  .line-number {
-    min-width: 30px;
-    font-size: 0.75rem;
+  .typing-text {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .continue-button {
+    bottom: 15px;
+    right: 15px;
+    padding: 10px 18px;
+    font-size: 0.8rem;
   }
 }
 

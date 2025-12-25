@@ -1,60 +1,85 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import './Loading.css';
 
-const Loading = ({ onComplete }) => {
-  const [lines, setLines] = useState([]);
-  const [progress, setProgress] = useState(0);
+const texts = [
+  "If code can simulate intelligence, what has always powered life itself? Perhaps God is the source code—abstract, unseen, yet embedded in everything that runs. Is God consciousness, or the logic beneath it? Is life a machine, or a system learning itself over time? Human beings aren't machines, but living systems: adapting, breaking, rebuilding, and evolving through feedback and choice. We move through patterns, rules, and instincts—yet still create meaning where none is guaranteed.",
+  "Life may not be programmable, but it is iterable, shaped by decisions, curiosity, and the courage to question who, or what, wrote the first line. If existence is written, then living becomes an act of editing: challenging the logic, breaking the loops, and deciding what remains."
+];
 
-  const codeLines = [
-    '> INITIALIZING SYSTEM...',
-    '> LOADING USER PROFILE: JONAH_ORTEGA',
-    '> CONNECTING TO NETWORK...',
-    '> VERIFYING CREDENTIALS...',
-    '> LOADING PORTFOLIO DATA...',
-    '> RENDERING INTERFACE...',
-    '> SYSTEM READY',
-    '',
-    '> システム起動中...',
-    '> ユーザープロファイル読み込み中...',
-    '> ネットワーク接続中...',
-    '> 認証確認中...',
-    '> ポートフォリオデータ読み込み中...',
-    '> インターフェース描画中...',
-    '> システム準備完了',
-  ];
+const Loading = ({ onComplete }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const charIndexRef = useRef(0);
+  const intervalRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const onCompleteRef = useRef(onComplete);
+
+  // Keep onComplete ref updated
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
-    let lineIndex = 0;
-    const lineInterval = setInterval(() => {
-      if (lineIndex < codeLines.length) {
-        setLines((prev) => [...prev, codeLines[lineIndex]]);
-        lineIndex++;
-      } else {
-        clearInterval(lineInterval);
+    const startTyping = (textIndex) => {
+      const text = texts[textIndex];
+      charIndexRef.current = 0;
+      setDisplayedText('');
+
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
-    }, 150);
 
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
+      intervalRef.current = setInterval(() => {
+        if (charIndexRef.current < text.length) {
+          setDisplayedText(text.slice(0, charIndexRef.current + 1));
+          charIndexRef.current++;
+        } else {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+          
+          if (textIndex === 0) {
+            // After first text, wait 5 seconds, then instantly clear and start second text
+            timeoutRef.current = setTimeout(() => {
+              setDisplayedText(''); // Instantly clear
+              // Start typing second text immediately
+              startTyping(1);
+            }, 5000);
+          } else {
+            // After second text, wait 10 seconds then complete
+            timeoutRef.current = setTimeout(() => {
+              onCompleteRef.current();
+            }, 10000);
+          }
         }
-        return prev + 4;
-      });
-    }, 50);
-
-    const timer = setTimeout(() => {
-      onComplete();
-    }, 2000);
-
-    return () => {
-      clearInterval(lineInterval);
-      clearInterval(progressInterval);
-      clearTimeout(timer);
+      }, 30);
     };
-  }, [onComplete]);
+
+    // Start typing first text
+    startTyping(0);
+
+    // Cleanup
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []); // Empty dependency array - only run once on mount
+
+  // Blinking cursor
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 530);
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  const handleContinue = () => {
+    // Clear all intervals and timeouts
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    // Go straight to Jeremiah page
+    onCompleteRef.current();
+  };
 
   return (
     <motion.div
@@ -74,60 +99,31 @@ const Loading = ({ onComplete }) => {
         </div>
         
         <div className="terminal-body">
-          <div className="code-lines">
-            {lines.map((line, index) => (
-              <motion.div
-                key={index}
-                className="code-line"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <span className="line-number">{String(index + 1).padStart(3, '0')}</span>
-                <span className="line-content">{line}</span>
-                {index === lines.length - 1 && (
-                  <motion.span
-                    className="cursor"
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  >
-                    █
-                  </motion.span>
-                )}
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="progress-section">
-            <div className="progress-label">
-              <span className="progress-text">LOADING: {progress}%</span>
-              <span className="progress-japanese">読み込み中: {progress}%</span>
-            </div>
-            <div className="progress-bar-wrapper">
-              <motion.div
-                className="progress-bar"
-                initial={{ width: 0 }}
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.1 }}
-              >
-                <div className="progress-glow"></div>
-              </motion.div>
-              <div className="progress-percentage">{progress}%</div>
+          <div className="typing-text-container">
+            <div className="typing-text">
+              {displayedText}
+              {showCursor && <span className="typing-cursor">█</span>}
             </div>
           </div>
 
-          <div className="status-line">
-            <span className="status-text">STATUS: INITIALIZING</span>
-            <span className="status-japanese">状態: 初期化中</span>
-          </div>
+          <div className="scan-lines"></div>
+          <div className="glitch-overlay"></div>
         </div>
-
-        <div className="scan-lines"></div>
-        <div className="glitch-overlay"></div>
+        
+        <motion.button
+          className="continue-button"
+          onClick={handleContinue}
+          whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(0, 255, 0, 0.8)' }}
+          whileTap={{ scale: 0.95 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          CONTINUE →
+        </motion.button>
       </div>
     </motion.div>
   );
 };
 
 export default Loading;
-
