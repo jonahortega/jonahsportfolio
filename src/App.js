@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
@@ -117,6 +118,7 @@ function App() {
           </AnimatePresence>
         </>
       )}
+      <Analytics />
     </div>
   );
 }
